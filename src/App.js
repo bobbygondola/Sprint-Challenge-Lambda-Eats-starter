@@ -70,42 +70,43 @@ function App() {
     const name = evt.target.name
     const value = evt.target.value
 
-    setFormValues({...formValues, [name]: value})
+    setFormValues({...formValues, [name]: value});
 
+
+    //yup
+    yup
+    .reach(formSchema, name)
+    .validate(value)
+    .then(valid => {
+      setFormErrors({
+        ...formErrors,
+        [name]: '',
+      })
+    })
+    .catch(err => {
+      setFormErrors({
+        ...formErrors,
+        [name]: err.errors[0]
+      })
+      setFormErrors({
+        ...formErrors,
+        [name]: err.errors[0]
+      })
+    })
     }
 
-    // yup
-    // .reach(formSchema, name)
-    // .validate(value)
-    // .then(valid => {
-    //   setFormErrors({
-    //     ...formErrors,
-    //     [name]: '',
-    //   })
-    // })
-    // .catch(err => {
-    //   setFormErrors({
-    //     ...formErrors,
-    //     [name]: err.errors[0]
-    //   })
-    //   setFormErrors({
-    //     ...formErrors,
-    //     [name]: err.errors[0]
-    //   })
-    // })
+  
+
   ///////////////checkbox change
       const onCheckboxChange = evt => {
+
         const { name } = evt.target
         const isChecked = evt.target.checked
     
         setFormValues({
-          ...formValues,
-          toppings: {
-            ...formValues.toppings,
-            [name]: isChecked,
-          }
-        })
-      }
+          ...formValues, toppings: {...formValues.toppings, [name]: isChecked}})
+        
+        }
 
       //post order to the api
       // const postOrder = info => { 
