@@ -6,23 +6,26 @@ import Form from "./Form"
 //special imports
 import * as yup from "yup";
 import axios from 'axios'
+//variables
+const url = "https://reqres.in/api/users";
 
-const memberList = [{
-  name: "bobby",
-  size: "Large",
-  special: "NO",
-  toppings: {
-    pepperoni: true,
-    sausage: true,
-    bacon: true,
-    olives: false
-  }
+// const memberList = [{
+//   name: "bobby",
+//   size: "Large",
+//   special: "NO",
+//   toppings: {
+//     pepperoni: true,
+//     sausage: true,
+//     bacon: true,
+//     olives: false
+//   }
 
-}]
+// }]
 
   const initialFormValues = {
       name: '',
       size: '',
+      special: '',
       ///// CHECKBOXES /////
       toppings: {
         pepperoni: false,
@@ -67,27 +70,29 @@ function App() {
     const name = evt.target.name
     const value = evt.target.value
 
-    yup
-      .reach(formSchema, name)
-      .validate(value)
-      .then(valid => {
-        setFormErrors({
-          ...formErrors,
-          [name]: '',
-        })
-      })
-      .catch(err => {
-        setFormErrors({
-          ...formErrors,
-          [name]: err.errors[0]
-        })
-        setFormErrors({
-          ...formErrors,
-          [name]: err.errors[0]
-        })
-      })
+    setFormValues({...formValues, [name]: value})
 
     }
+
+    // yup
+    // .reach(formSchema, name)
+    // .validate(value)
+    // .then(valid => {
+    //   setFormErrors({
+    //     ...formErrors,
+    //     [name]: '',
+    //   })
+    // })
+    // .catch(err => {
+    //   setFormErrors({
+    //     ...formErrors,
+    //     [name]: err.errors[0]
+    //   })
+    //   setFormErrors({
+    //     ...formErrors,
+    //     [name]: err.errors[0]
+    //   })
+    // })
   ///////////////checkbox change
       const onCheckboxChange = evt => {
         const { name } = evt.target
@@ -103,18 +108,19 @@ function App() {
       }
 
       //post order to the api
-      const submitOrder = info => { 
-        //set the updated list of friends in state
+      // const postOrder = info => { 
+      //   //set the updated list of friends in state
   
-        axios.post("https://reqres.in/api/users", info)
-          .then(res => {
-            setOrder([...order, res.data])
-          })
-          .catch(err => {
-            debugger
-          })
+      //   axios.post(url, info)
+      //     .then(res => {
+      //       setOrder([...order, res.data])
+      //       console.log(res.data)
+      //     })
+      //     .catch(err => {
+      //       debugger
+      //     })
     
-      }
+      // }
 
 
 
@@ -125,6 +131,7 @@ function App() {
         const newOrder = {
           name: formValues.name,
           size: formValues.size,
+          special: formValues.special,
           toppings: Object.keys(formValues.toppings)
             .filter(topping => formValues.toppings[topping] === true)
 
@@ -133,6 +140,7 @@ function App() {
     
         // magic stuff
         setOrder([...order, newOrder])
+        // postOrder(newOrder)
         setFormValues(initialFormValues)
       }
       
@@ -144,15 +152,16 @@ function App() {
       
 
       <Route exact path="/pizza" component={Form}/>
-      {/* <Route path="/" component={App}/> */}
+      
 
-    <br/>
+    
+
       {order.map((orders) => {
         return (
-          <div key={order.name} id="pizzaorder"> 
-          <h4>{order.name}</h4>
-          <p>{order.size}</p>
-        <p>{order.special}</p>
+          <div key={orders.name} id="pizzaorder"> 
+          <h4>{orders.name}</h4>
+          <p>{orders.size}</p>
+          <p>{orders.special}</p>
            </div>
         )
       })}

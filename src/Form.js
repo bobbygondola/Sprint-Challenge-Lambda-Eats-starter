@@ -22,13 +22,14 @@ function Form(props){
                 <button>Im not ready yet..</button>
             </Link>
 
-            <form id="form">
+            <form onSubmit={onSubmit} id="form">
 
             <label>
             {errors.name}
             <br/>
-                <input onChange={onInputChange}
-                value="name"
+                <input 
+                onChange={onInputChange}
+                value={values.name}
                 name="name"
                 type="text"
                 />
@@ -56,11 +57,11 @@ function Form(props){
                 <br/>
 
                 <h3>Add Toppings!</h3>
-                <label> <input onChange={onCheckboxChange} name="pepperoni" type="checkbox" />Pepperoni</label>
-                <label> <input onChange={onCheckboxChange} name="sausage" type="checkbox" />Sausage</label>
+                <label> <input value={values.toppings.pepperoni} onChange={onCheckboxChange} name="pepperoni" type="checkbox" />Pepperoni</label>
+                <label> <input value={values.toppings.sausage} onChange={onCheckboxChange}  name="sausage" type="checkbox" />Sausage</label>
                 <br/>
-                <label> <input onChange={onCheckboxChange} name="bacon" type="checkbox" />Bacon</label>
-                <label> <input onChange={onCheckboxChange} name="olives" type="checkbox" />Olives</label>
+                <label> <input value={values.toppings.bacon} onChange={onCheckboxChange} name="bacon" type="checkbox" />Bacon</label>
+                <label> <input value={values.toppings.olives} onChange={onCheckboxChange} name="olives" type="checkbox" />Olives</label>
                 <br/>
 
                 <label>
@@ -72,7 +73,7 @@ function Form(props){
                 Special Instructions
             </label>
             <br/>
-            <button onSubmit={onSubmit}>Submit Your Order</button>
+            <button >Submit Your Order</button>
             
 
             </form>
