@@ -143,7 +143,7 @@ function App() {
       <Link to="/pizza"><button>ORDER NOW</button></Link>
       
 
-      <Route path="/pizza" component={Form}/>
+      <Route exact path="/pizza" component={Form}/>
       {/* <Route path="/" component={App}/> */}
 
     <br/>
