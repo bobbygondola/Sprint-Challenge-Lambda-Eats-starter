@@ -7,7 +7,18 @@ import Form from "./Form"
 import * as yup from "yup";
 import axios from 'axios'
 
+const memberList = [{
+  name: "bobby",
+  size: "Large",
+  special: "NO",
+  toppings: {
+    pepperoni: true,
+    sausage: true,
+    bacon: true,
+    olives: false
+  }
 
+}]
 
   const initialFormValues = {
       name: '',
@@ -36,6 +47,8 @@ const formSchema = yup.object().shape({
   size: yup
     .string()
     .required('Size is required'),
+    special: yup
+    .string()
 })
 
 
@@ -90,11 +103,9 @@ function App() {
       }
 
       //post order to the api
-
-      const submitOrder = info => { // minus id
-        // 🔥 STEP 5 - WE NEED A FUNCTION TO POST A NEW FRIEND TO THE API!
-        // and set the updated list of friends in state
-        // the endpoint responds (on success) with the new friend (with id !!)
+      const submitOrder = info => { 
+        //set the updated list of friends in state
+  
         axios.post("https://reqres.in/api/users", info)
           .then(res => {
             setOrder([...order, res.data])
@@ -116,17 +127,15 @@ function App() {
           size: formValues.size,
           toppings: Object.keys(formValues.toppings)
             .filter(topping => formValues.toppings[topping] === true)
+
+            
         }
     
-        // 🔥 STEP 6 - WE NEED TO POST OUR NEW FRIEND TO THE API!
+        // magic stuff
         setOrder([...order, newOrder])
         setFormValues(initialFormValues)
       }
-
-
-
-
-
+      
   return (
     <div>
       <h1 id="logo">Lambda Eats</h1>
@@ -135,7 +144,18 @@ function App() {
       
 
       <Route path="/pizza" component={Form}/>
-      <Route path="/" component={App}/>
+      {/* <Route path="/" component={App}/> */}
+
+    <br/>
+      {order.map((orders) => {
+        return (
+          <div key={order.name} id="pizzaorder"> 
+          <h4>{order.name}</h4>
+          <p>{order.size}</p>
+        <p>{order.special}</p>
+           </div>
+        )
+      })}
 
       <Form 
               values={formValues}
