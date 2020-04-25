@@ -16,13 +16,15 @@ function Form(props){
 
     return (
         <div>
-            <h2>Order Now!</h2>
+            <form onSubmit={onSubmit} id="form">
+
+            <h2 id="place">Place Your Order Below!</h2>
 
             <Link to="/home">
-                <button>Im not ready yet..</button>
+                <button>Take Me Home..</button>
             </Link>
 
-            <form onSubmit={onSubmit} id="form">
+            
 
             <label>
             {errors.name}
@@ -30,11 +32,12 @@ function Form(props){
                 <input 
                 onChange={onInputChange}
                 value={values.name}
+                placeholder="Type Your Damn Name"
                 name="name"
                 type="text"
                 />
                 <br/>
-                Name for Order
+                Name For Order
             </label>
             
            
@@ -48,20 +51,20 @@ function Form(props){
             <select name="size" onChange={onInputChange}
             
             >
-                <option defaultValue="" value={values.size} >Please choose</option>
-                <option value="large"  >Large</option>
-                <option value="medium" >Medium</option>
-                <option value="small" >Small</option>
+                <option defaultValue="" value={values.size} >Choose Your Damn Size</option>
+                <option value="Large"  >Large</option>
+                <option value="Medium" >Medium</option>
+                <option value="Small" >Small</option>
                 </select>
 
                 <br/>
 
                 <h3>Add Toppings!</h3>
-                <label> <input value={values.toppings.pepperoni} onChange={onCheckboxChange} name="pepperoni" type="checkbox" />Pepperoni</label>
-                <label> <input value={values.toppings.sausage} onChange={onCheckboxChange}  name="sausage" type="checkbox" />Sausage</label>
+                <label> <input value={values.toppings.pepperoni} onChange={onCheckboxChange} name="Pepperoni, " type="checkbox" />Pepperoni</label>
+                <label> <input value={values.toppings.sausage} onChange={onCheckboxChange}  name="Sausage, " type="checkbox" />Sausage</label>
                 <br/>
-                <label> <input value={values.toppings.bacon} onChange={onCheckboxChange} name="bacon" type="checkbox" />Bacon</label>
-                <label> <input value={values.toppings.olives} onChange={onCheckboxChange} name="olives" type="checkbox" />Olives</label>
+                <label> <input value={values.toppings.bacon} onChange={onCheckboxChange} name="Bacon, " type="checkbox" />Bacon</label>
+                <label> <input value={values.toppings.olives} onChange={onCheckboxChange} name="Olives" type="checkbox" />Olives</label>
                 <br/>
 
                 <label>
@@ -69,8 +72,9 @@ function Form(props){
                 value={values.special}
                 name="special"
                 type="text"
+                placeholder="Better Not Request Anything"
                 />
-                Special Instructions
+                : Special Instructions
             </label>
             <br/>
             <button >Submit Your Order</button>

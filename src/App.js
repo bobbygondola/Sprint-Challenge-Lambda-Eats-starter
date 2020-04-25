@@ -9,18 +9,7 @@ import axios from 'axios'
 //variables
 const url = "https://reqres.in/api/users";
 
-// const memberList = [{
-//   name: "bobby",
-//   size: "Large",
-//   special: "NO",
-//   toppings: {
-//     pepperoni: true,
-//     sausage: true,
-//     bacon: true,
-//     olives: false
-//   }
 
-// }]
 
   const initialFormValues = {
       name: '',
@@ -147,9 +136,19 @@ function App() {
       
   return (
     <div>
+      <nav>
       <h1 id="logo">Lambda Eats</h1>
-      <p>Where you can only have pizza..</p>
+      <p id="sublogo">Where you can only have pizza..</p>
       <Link to="/pizza"><button>ORDER NOW</button></Link>
+      <button>About Us</button>
+      <button>Contact Us</button>
+      <button>More About Us</button>
+      <button>Why Do You Want To Know More?</button>
+      <button>Im Scared</button>
+      <button>Why Ask About My Family</button>
+      <button>Stay Away From My Family</button>
+      <button>Free Pizza For Sarah Elias ONLY!</button>
+      </nav>
       
 
       <Route exact path="/pizza" component={Form}/>
@@ -160,9 +159,10 @@ function App() {
       {order.map((orders) => {
         return (
           <div key={orders.name} id="pizzaorder"> 
-          <h4>{orders.name}</h4>
-          <p>{orders.size}</p>
-          <p>{orders.special}</p>
+          <h4>Name for the order: {orders.name}</h4>
+          <p>Pizza Size: {orders.size}</p>
+        <p>Toppings: {orders.toppings}</p>
+          <p>Special Requests: {orders.special}</p>
            </div>
         )
       })}
